@@ -85,6 +85,9 @@
   }
   .avatar-lg.avatar-ph { font-size: 22px; }
   .cell-avatar { display: inline-flex; align-items: center; gap: 10px; }
+  .manual-badge { display: inline-block; font-size: 10px; font-weight: 700;
+    padding: 2px 6px; border-radius: 10px; background: var(--brand-blue);
+    color: #fff; margin-left: 6px; text-transform: uppercase; letter-spacing: .05em; }
   .signup-card {
     display: flex; flex-direction: column; gap: 12px;
     padding: 16px 22px; margin-bottom: 20px;
@@ -144,39 +147,39 @@
   <header>
     <div class="kicker">APP Sport</div>
     <h1>APP Sport Points Challenge</h1>
-    <div class="sub">2026-07-01 to 2026-07-30 &nbsp;&middot;&nbsp; last updated: 23 Jul 2026, 23:00 CEST</div>
+    <div class="sub">2026-07-01 to 2026-07-30 &nbsp;&middot;&nbsp; laatst bijgewerkt: 23 jul 2026, 23:10 CEST</div>
   </header>
 
   <div class="hero">
     <div>
-      <div class="label">Total points earned by everyone</div>
-      <div class="big">6,027 <span>pts</span></div>
+      <div class="label">Totaal punten van iedereen</div>
+      <div class="big">6,027 <span>ptn</span></div>
     </div>
     <div class="mini">
-      <div><div class="n">11</div><div class="l">People</div></div>
-      <div><div class="n">118</div><div class="l">Activities</div></div>
+      <div><div class="n">11</div><div class="l">Deelnemers</div></div>
+      <div><div class="n">118</div><div class="l">Activiteiten</div></div>
     </div>
   </div>
 
-  <div class="signup-card"><div class="signup-row"><div><div class="signup-title">New to the challenge?</div><div class="signup-sub">Connect Strava once - your workouts sync automatically after that.</div></div><a class="signup-btn" href="https://www.strava.com/oauth/authorize?client_id=265877&amp;response_type=code&amp;redirect_uri=https://script.google.com/macros/s/AKfycbyTGeUoGzYRNH_FdnV8KcMgtbjT2R3i3IMy0u_0aKKdAC023PuG1tRZ3DitCme4lKEW-g/exec&amp;approval_prompt=auto&amp;scope=activity:read_all" target="_blank" rel="noopener">Join via Strava &rarr;</a></div><div class="signup-tip"><b>Signup not working on mobile?</b> Open this page in Safari or Chrome (not from WhatsApp / LinkedIn / Slack), and log in with your Strava email + password &mdash; the Google/Apple sign-in buttons often fail on mobile.</div></div>
+  <div class="signup-card"><div class="signup-row"><div><div class="signup-title">Nieuw in de challenge?</div><div class="signup-sub">Verbind je Strava &eacute;&eacute;n keer &mdash; daarna worden je activiteiten automatisch gesynchroniseerd.</div></div><a class="signup-btn" href="https://www.strava.com/oauth/authorize?client_id=265877&amp;response_type=code&amp;redirect_uri=https://script.google.com/macros/s/AKfycbyTGeUoGzYRNH_FdnV8KcMgtbjT2R3i3IMy0u_0aKKdAC023PuG1tRZ3DitCme4lKEW-g/exec&amp;approval_prompt=auto&amp;scope=activity:read_all" target="_blank" rel="noopener">Aanmelden via Strava &rarr;</a></div><div class="signup-tip"><b>Lukt aanmelden niet op mobiel?</b> Open deze pagina in Safari of Chrome (niet vanuit WhatsApp / LinkedIn / Slack) en log in met je Strava e-mail + wachtwoord &mdash; de Google/Apple aanmeldknoppen werken vaak niet op mobiel.</div></div>
   <div class="manual-card">
   <div class="manual-row">
     <div>
-      <div class="manual-title">No Strava? Log an activity manually.</div>
-      <div class="manual-sub">Anyone can add an activity - honor system, please log what you actually did.</div>
+      <div class="manual-title">Geen Strava? Log je activiteit handmatig.</div>
+      <div class="manual-sub">Iedereen kan een activiteit toevoegen &mdash; vertrouwenssysteem, log wat je echt gedaan hebt.</div>
     </div>
-    <button class="manual-btn" type="button" onclick="mFormToggle()">Add activity</button>
+    <button class="manual-btn" type="button" onclick="mFormToggle()">Activiteit toevoegen</button>
   </div>
   <form id="mForm" class="manual-form" style="display:none" onsubmit="mSubmit(event)">
-    <input type="text" id="mName" placeholder="Your name" required>
+    <input type="text" id="mName" placeholder="Je naam" required>
     <input type="date" id="mDate" required>
     <select id="mSport" required>
-      <option value="">Pick a sport...</option>
+      <option value="">Kies een sport...</option>
       <option value="Crossfit">Crossfit</option><option value="HighIntensityIntervalTraining">HighIntensityIntervalTraining</option><option value="Rowing">Rowing</option><option value="Run">Run</option><option value="Swim">Swim</option><option value="TrailRun">TrailRun</option><option value="VirtualRun">VirtualRun</option><option value="StairStepper">StairStepper</option><option value="Basketball">Basketball</option><option value="Hike">Hike</option><option value="MountainBikeRide">MountainBikeRide</option><option value="Padel">Padel</option><option value="RockClimbing">RockClimbing</option><option value="Soccer">Soccer</option><option value="Squash">Squash</option><option value="Tennis">Tennis</option><option value="Badminton">Badminton</option><option value="GravelRide">GravelRide</option><option value="VolleyBall">VolleyBall</option><option value="Canoeing">Canoeing</option><option value="Elliptical">Elliptical</option><option value="Kayaking">Kayaking</option><option value="Ride">Ride</option><option value="StandUpPaddling">StandUpPaddling</option><option value="VirtualRide">VirtualRide</option><option value="Workout">Workout</option><option value="AlpineSki">AlpineSki</option><option value="IceSkate">IceSkate</option><option value="InlineSkate">InlineSkate</option><option value="Skateboard">Skateboard</option><option value="Snowboard">Snowboard</option><option value="WeightTraining">WeightTraining</option><option value="Pilates">Pilates</option><option value="Walk">Walk</option><option value="EBikeRide">EBikeRide</option><option value="EMountainBikeRide">EMountainBikeRide</option><option value="Golf">Golf</option><option value="Yoga">Yoga</option>
     </select>
-    <input type="number" id="mMinutes" placeholder="Minutes" min="1" max="600" required>
-    <input type="text" id="mNote" placeholder="Note (optional)">
-    <button type="submit" class="manual-btn">Submit</button>
+    <input type="number" id="mMinutes" placeholder="Minuten" min="1" max="600" required>
+    <input type="text" id="mNote" placeholder="Notitie (optioneel)">
+    <button type="submit" class="manual-btn">Verzenden</button>
     <div id="mStatus" class="manual-status"></div>
   </form>
 </div>
@@ -200,7 +203,7 @@ async function mSubmit(ev) {
     minutes: Number(document.getElementById('mMinutes').value),
     note: document.getElementById('mNote').value.trim(),
   };
-  st.textContent = 'Submitting...';
+  st.textContent = 'Bezig met verzenden...';
   st.className = 'manual-status pending';
   try {
     const res = await fetch(M_ENDPOINT, {
@@ -209,30 +212,30 @@ async function mSubmit(ev) {
       body: JSON.stringify(payload),
     });
     if (res.ok) {
-      st.textContent = 'Thanks! Your activity will show on the leaderboard within a few minutes.';
+      st.textContent = 'Bedankt! Je activiteit verschijnt op het klassement bij de volgende refresh.';
       st.className = 'manual-status ok';
       document.getElementById('mForm').reset();
     } else {
-      st.textContent = 'Something went wrong. Please try again.';
+      st.textContent = 'Er ging iets mis. Probeer het opnieuw.';
       st.className = 'manual-status err';
     }
   } catch (err) {
-    st.textContent = 'Network error. Please try again.';
+    st.textContent = 'Netwerkfout. Probeer het opnieuw.';
     st.className = 'manual-status err';
   }
 }
 </script>
 
 
-  <div class="podium-row"><div class="podium silver"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/44236361/46503574/1/medium.jpg" alt="" loading="lazy"><div class="medal">2</div><div class="p-name">Joren De Gruyter</div><div class="p-pts">1,359</div><div class="p-label">points</div></div><div class="podium gold"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy"><div class="medal">1</div><div class="p-name">Charles Lowis</div><div class="p-pts">1,485</div><div class="p-label">points</div></div><div class="podium bronze"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy"><div class="medal">3</div><div class="p-name">Joachim Jacobs</div><div class="p-pts">1,118</div><div class="p-label">points</div></div></div>
+  <div class="podium-row"><div class="podium silver"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/44236361/46503574/1/medium.jpg" alt="" loading="lazy"><div class="medal">2</div><div class="p-name">Joren De Gruyter</div><div class="p-pts">1,359</div><div class="p-label">punten</div></div><div class="podium gold"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy"><div class="medal">1</div><div class="p-name">Charles Lowis</div><div class="p-pts">1,485</div><div class="p-label">punten</div></div><div class="podium bronze"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy"><div class="medal">3</div><div class="p-name">Joachim Jacobs</div><div class="p-pts">1,118</div><div class="p-label">punten</div></div></div>
 
   <div class="card full" style="margin-bottom:20px">
-    <h2>Leaderboard</h2>
+    <h2>Klassement</h2>
     <table>
       <thead>
         <tr>
-          <th>#</th><th>Name</th><th class="num">Points</th>
-          <th class="num">Activities</th><th class="num">Active min</th><th>Last active</th>
+          <th>#</th><th>Naam</th><th class="num">Punten</th>
+          <th class="num">Activiteiten</th><th class="num">Actieve min</th><th>Laatst actief</th>
         </tr>
       </thead>
       <tbody><tr class="top"><td class="rank">1</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td class="num strong">1,485</td><td class="num">34</td><td class="num">1,283</td><td class="muted">2026-07-23</td></tr><tr class="top"><td class="rank">2</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/44236361/46503574/1/medium.jpg" alt="" loading="lazy">Joren De Gruyter</span></td><td class="num strong">1,359</td><td class="num">14</td><td class="num">905</td><td class="muted">2026-07-17</td></tr><tr class="top"><td class="rank">3</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy">Joachim Jacobs</span></td><td class="num strong">1,118</td><td class="num">13</td><td class="num">1,060</td><td class="muted">2026-07-23</td></tr><tr class=""><td class="rank">4</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/34023886/46622517/1/medium.jpg" alt="" loading="lazy">Maarten Verhelst</span></td><td class="num strong">413</td><td class="num">10</td><td class="num">325</td><td class="muted">2026-07-22</td></tr><tr class=""><td class="rank">5</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/55525344/14531419/2/medium.jpg" alt="" loading="lazy">Okke Crijns</span></td><td class="num strong">385</td><td class="num">8</td><td class="num">376</td><td class="muted">2026-07-21</td></tr><tr class=""><td class="rank">6</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/18743755/5344025/2/medium.jpg" alt="" loading="lazy">Stijn Van Den Eede</span></td><td class="num strong">335</td><td class="num">8</td><td class="num">268</td><td class="muted">2026-07-23</td></tr><tr class=""><td class="rank">7</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/48717503/28722629/2/medium.jpg" alt="" loading="lazy">Eberd De Donder</span></td><td class="num strong">310</td><td class="num">20</td><td class="num">269</td><td class="muted">2026-07-21</td></tr><tr class=""><td class="rank">8</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/52877405/48778842/1/medium.jpg" alt="" loading="lazy">Tom Bats</span></td><td class="num strong">303</td><td class="num">4</td><td class="num">287</td><td class="muted">2026-07-15</td></tr><tr class=""><td class="rank">9</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/27407948/12532567/1/medium.jpg" alt="" loading="lazy">Dan Turnure</span></td><td class="num strong">278</td><td class="num">5</td><td class="num">185</td><td class="muted">2026-07-20</td></tr><tr class=""><td class="rank">10</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">T</span>Tester2</span></td><td class="num strong">24</td><td class="num">1</td><td class="num">16</td><td class="muted">2026-07-23</td></tr><tr class=""><td class="rank">11</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">T</span>Tester</span></td><td class="num strong">18</td><td class="num">1</td><td class="num">15</td><td class="muted">2026-07-23</td></tr></tbody>
@@ -240,15 +243,15 @@ async function mSubmit(ev) {
   </div>
 
   <div class="card full" style="margin-bottom:20px">
-    <h2>Recent activities</h2>
+    <h2>Recente activiteiten</h2>
     <table>
       <thead>
         <tr>
-          <th>When</th><th>Who</th><th>Sport</th>
-          <th class="num">Distance</th><th class="num">Duration</th><th class="num">Points</th>
+          <th>Wanneer</th><th>Wie</th><th>Sport</th>
+          <th class="num">Afstand</th><th class="num">Duur</th><th class="num">Punten</th>
         </tr>
       </thead>
-      <tbody><tr><td class="muted">23 Jul 18:12</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy">Joachim Jacobs</span></td><td>Run</td><td class="num">11.2 km</td><td class="num">58 min</td><td class="num strong">88</td></tr><tr><td class="muted">23 Jul 11:36</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/18743755/5344025/2/medium.jpg" alt="" loading="lazy">Stijn Van Den Eede</span></td><td>Hike</td><td class="num">9.2 km</td><td class="num">100 min</td><td class="num strong">120</td></tr><tr><td class="muted">23 Jul 07:38</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td>Ride</td><td class="num">12.6 km</td><td class="num">34 min</td><td class="num strong">35</td></tr><tr><td class="muted">23 Jul 00:00</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">T</span>Tester</span></td><td>Basketball</td><td class="num">-</td><td class="num">15 min</td><td class="num strong">18</td></tr><tr><td class="muted">23 Jul 00:00</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">T</span>Tester2</span></td><td>Rowing</td><td class="num">-</td><td class="num">16 min</td><td class="num strong">24</td></tr><tr><td class="muted">23 Jul 00:00</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td>Squash</td><td class="num">-</td><td class="num">10 min</td><td class="num strong">12</td></tr><tr><td class="muted">22 Jul 21:37</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td>Run</td><td class="num">8.8 km</td><td class="num">45 min</td><td class="num strong">68</td></tr><tr><td class="muted">22 Jul 18:05</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy">Joachim Jacobs</span></td><td>Padel</td><td class="num">2.1 km</td><td class="num">64 min</td><td class="num strong">78</td></tr><tr><td class="muted">22 Jul 18:03</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td>Ride</td><td class="num">13.3 km</td><td class="num">30 min</td><td class="num strong">31</td></tr><tr><td class="muted">22 Jul 16:53</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/34023886/46622517/1/medium.jpg" alt="" loading="lazy">Maarten Verhelst</span></td><td>Run</td><td class="num">4.0 km</td><td class="num">20 min</td><td class="num strong">30</td></tr><tr><td class="muted">22 Jul 09:21</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/18743755/5344025/2/medium.jpg" alt="" loading="lazy">Stijn Van Den Eede</span></td><td>Run</td><td class="num">5.1 km</td><td class="num">31 min</td><td class="num strong">47</td></tr><tr><td class="muted">22 Jul 07:20</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy">Joachim Jacobs</span></td><td>Swim</td><td class="num">1.5 km</td><td class="num">31 min</td><td class="num strong">47</td></tr><tr><td class="muted">22 Jul 07:18</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td>Ride</td><td class="num">12.0 km</td><td class="num">31 min</td><td class="num strong">32</td></tr><tr><td class="muted">21 Jul 20:22</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/18743755/5344025/2/medium.jpg" alt="" loading="lazy">Stijn Van Den Eede</span></td><td>Swim</td><td class="num">1.2 km</td><td class="num">18 min</td><td class="num strong">28</td></tr><tr><td class="muted">21 Jul 18:21</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/48717503/28722629/2/medium.jpg" alt="" loading="lazy">Eberd De Donder</span></td><td>WeightTraining</td><td class="num">-</td><td class="num">7 min</td><td class="num strong">6</td></tr></tbody>
+      <tbody><tr><td class="muted">23 Jul 18:12</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy">Joachim Jacobs</span></td><td>Run</td><td class="num">11.2 km</td><td class="num">58 min</td><td class="num strong">88</td></tr><tr><td class="muted">23 Jul 11:36</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/18743755/5344025/2/medium.jpg" alt="" loading="lazy">Stijn Van Den Eede</span></td><td>Hike</td><td class="num">9.2 km</td><td class="num">100 min</td><td class="num strong">120</td></tr><tr><td class="muted">23 Jul 07:38</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td>Ride</td><td class="num">12.6 km</td><td class="num">34 min</td><td class="num strong">35</td></tr><tr><td class="muted">23 Jul 00:00</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">T</span>Tester</span></td><td>Basketball <span class="manual-badge">handmatig</span></td><td class="num">-</td><td class="num">15 min</td><td class="num strong">18</td></tr><tr><td class="muted">23 Jul 00:00</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">T</span>Tester2</span></td><td>Rowing <span class="manual-badge">handmatig</span></td><td class="num">-</td><td class="num">16 min</td><td class="num strong">24</td></tr><tr><td class="muted">23 Jul 00:00</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td>Squash <span class="manual-badge">handmatig</span></td><td class="num">-</td><td class="num">10 min</td><td class="num strong">12</td></tr><tr><td class="muted">22 Jul 21:37</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td>Run</td><td class="num">8.8 km</td><td class="num">45 min</td><td class="num strong">68</td></tr><tr><td class="muted">22 Jul 18:05</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy">Joachim Jacobs</span></td><td>Padel</td><td class="num">2.1 km</td><td class="num">64 min</td><td class="num strong">78</td></tr><tr><td class="muted">22 Jul 18:03</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td>Ride</td><td class="num">13.3 km</td><td class="num">30 min</td><td class="num strong">31</td></tr><tr><td class="muted">22 Jul 16:53</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/34023886/46622517/1/medium.jpg" alt="" loading="lazy">Maarten Verhelst</span></td><td>Run</td><td class="num">4.0 km</td><td class="num">20 min</td><td class="num strong">30</td></tr><tr><td class="muted">22 Jul 09:21</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/18743755/5344025/2/medium.jpg" alt="" loading="lazy">Stijn Van Den Eede</span></td><td>Run</td><td class="num">5.1 km</td><td class="num">31 min</td><td class="num strong">47</td></tr><tr><td class="muted">22 Jul 07:20</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy">Joachim Jacobs</span></td><td>Swim</td><td class="num">1.5 km</td><td class="num">31 min</td><td class="num strong">47</td></tr><tr><td class="muted">22 Jul 07:18</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</span></td><td>Ride</td><td class="num">12.0 km</td><td class="num">31 min</td><td class="num strong">32</td></tr><tr><td class="muted">21 Jul 20:22</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/18743755/5344025/2/medium.jpg" alt="" loading="lazy">Stijn Van Den Eede</span></td><td>Swim</td><td class="num">1.2 km</td><td class="num">18 min</td><td class="num strong">28</td></tr><tr><td class="muted">21 Jul 18:21</td><td class="name"><span class="cell-avatar"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/48717503/28722629/2/medium.jpg" alt="" loading="lazy">Eberd De Donder</span></td><td>WeightTraining</td><td class="num">-</td><td class="num">7 min</td><td class="num strong">6</td></tr></tbody>
     </table>
   </div>
 
@@ -258,26 +261,26 @@ async function mSubmit(ev) {
       <div class="chart-box"><canvas id="barChart"></canvas></div>
     </div>
     <div class="card">
-      <h2>Points by sport</h2>
+      <h2>Punten per sport</h2>
       <div class="chart-box"><canvas id="typeChart"></canvas></div>
     </div>
     <div class="card full">
-      <h2>Cumulative points over time</h2>
+      <h2>Cumulatieve punten in de tijd</h2>
       <div class="chart-box"><canvas id="cumChart"></canvas></div>
     </div>
     <div class="card full">
-      <h2>How points are calculated</h2>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:14px"><b>points = moving minutes &times; multiplier</b>. Every minute of Strava's moving time counts (idle time is stripped out by Strava automatically), with no per-activity cap.</p>
+      <h2>Hoe worden punten berekend</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px"><b>punten = actieve minuten &times; factor</b>. Elke minuut van Strava's actieve tijd telt (stiltijd wordt automatisch door Strava gefilterd), zonder cap per activiteit.</p>
       <table>
-        <thead><tr><th class="num">pts / min</th><th>Sports</th></tr></thead>
-        <tbody><tr><td class="num strong">1.5</td><td>Crossfit, HighIntensityIntervalTraining, Rowing, Run, Swim, TrailRun, VirtualRun</td></tr><tr><td class="num strong">1.3</td><td>StairStepper</td></tr><tr><td class="num strong">1.2</td><td>Basketball, Hike, MountainBikeRide, Padel, RockClimbing, Soccer, Squash, Tennis</td></tr><tr><td class="num strong">1.1</td><td>Badminton, GravelRide, VolleyBall</td></tr><tr><td class="num strong">1</td><td>Canoeing, Elliptical, Kayaking, Ride, StandUpPaddling, VirtualRide, Workout</td></tr><tr><td class="num strong">0.8</td><td>AlpineSki, IceSkate, InlineSkate, Skateboard, Snowboard, WeightTraining</td></tr><tr><td class="num strong">0.6</td><td>Pilates, Walk</td></tr><tr><td class="num strong">0.4</td><td>EBikeRide, EMountainBikeRide, Golf, Yoga</td></tr><tr><td class="num muted">1</td><td class="muted">any other sport</td></tr></tbody>
+        <thead><tr><th class="num">ptn / min</th><th>Sporten</th></tr></thead>
+        <tbody><tr><td class="num strong">1.5</td><td>Crossfit, HighIntensityIntervalTraining, Rowing, Run, Swim, TrailRun, VirtualRun</td></tr><tr><td class="num strong">1.3</td><td>StairStepper</td></tr><tr><td class="num strong">1.2</td><td>Basketball, Hike, MountainBikeRide, Padel, RockClimbing, Soccer, Squash, Tennis</td></tr><tr><td class="num strong">1.1</td><td>Badminton, GravelRide, VolleyBall</td></tr><tr><td class="num strong">1</td><td>Canoeing, Elliptical, Kayaking, Ride, StandUpPaddling, VirtualRide, Workout</td></tr><tr><td class="num strong">0.8</td><td>AlpineSki, IceSkate, InlineSkate, Skateboard, Snowboard, WeightTraining</td></tr><tr><td class="num strong">0.6</td><td>Pilates, Walk</td></tr><tr><td class="num strong">0.4</td><td>EBikeRide, EMountainBikeRide, Golf, Yoga</td></tr><tr><td class="num muted">1</td><td class="muted">elke andere sport</td></tr></tbody>
       </table>
     </div>
   </div>
 
   <footer>
-    Generated by the APP Sport Strava dashboard script. Only activities recorded during
-    the challenge window count.
+    Gegenereerd door het APP Sport Strava dashboard-script. Alleen activiteiten geregistreerd
+    tijdens de challenge tellen mee.
   </footer>
 </div>
 
