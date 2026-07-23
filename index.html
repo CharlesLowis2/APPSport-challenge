@@ -104,6 +104,39 @@
   }
   .signup-btn:hover { background: #d8410d; }
   @media (max-width: 560px) { .signup-row { flex-direction: column; align-items: stretch; } .signup-btn { justify-content: center; } }
+  .manual-card {
+    display: flex; flex-direction: column; gap: 12px;
+    padding: 16px 22px; margin-bottom: 20px;
+    background: var(--card); border: 1px solid var(--line);
+    border-left: 4px solid var(--brand-blue); border-radius: 14px;
+  }
+  .manual-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .manual-title { font-weight: 700; font-size: 15px; }
+  .manual-sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .manual-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--brand-blue); color: #fff; border: 0; cursor: pointer;
+    font-weight: 700; font-size: 14px; padding: 11px 20px;
+    border-radius: 8px; white-space: nowrap; transition: background .15s;
+    font-family: inherit;
+  }
+  .manual-btn:hover { background: #002a70; }
+  .manual-form {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 10px;
+    padding-top: 12px; border-top: 1px dashed var(--line);
+  }
+  .manual-form input, .manual-form select {
+    padding: 10px 12px; font-size: 14px; border: 1px solid var(--line); border-radius: 8px;
+    font-family: inherit; color: var(--ink); background: #fff;
+  }
+  .manual-form input[type="text"]:nth-of-type(2) { grid-column: 1 / -1; }
+  .manual-form .manual-btn { grid-column: 1 / -1; justify-content: center; }
+  .manual-status { grid-column: 1 / -1; font-size: 13px; padding: 4px 0; min-height: 18px; }
+  .manual-status.pending { color: var(--muted); }
+  .manual-status.ok { color: #2e7d32; }
+  .manual-status.err { color: var(--accent); }
+  @media (max-width: 720px) { .manual-form { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .manual-row { flex-direction: column; align-items: stretch; } .manual-btn { justify-content: center; } .manual-form { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -111,7 +144,7 @@
   <header>
     <div class="kicker">APP Sport</div>
     <h1>APP Sport Points Challenge</h1>
-    <div class="sub">2026-07-01 to 2026-07-30 &nbsp;&middot;&nbsp; last updated: 23 Jul 2026, 21:24 CEST</div>
+    <div class="sub">2026-07-01 to 2026-07-30 &nbsp;&middot;&nbsp; last updated: 23 Jul 2026, 22:18 CEST</div>
   </header>
 
   <div class="hero">
@@ -126,6 +159,70 @@
   </div>
 
   <div class="signup-card"><div class="signup-row"><div><div class="signup-title">New to the challenge?</div><div class="signup-sub">Connect Strava once - your workouts sync automatically after that.</div></div><a class="signup-btn" href="https://www.strava.com/oauth/authorize?client_id=265877&amp;response_type=code&amp;redirect_uri=https://script.google.com/macros/s/AKfycbyTGeUoGzYRNH_FdnV8KcMgtbjT2R3i3IMy0u_0aKKdAC023PuG1tRZ3DitCme4lKEW-g/exec&amp;approval_prompt=auto&amp;scope=activity:read_all" target="_blank" rel="noopener">Join via Strava &rarr;</a></div><div class="signup-tip"><b>Signup not working on mobile?</b> Open this page in Safari or Chrome (not from WhatsApp / LinkedIn / Slack), and log in with your Strava email + password &mdash; the Google/Apple sign-in buttons often fail on mobile.</div></div>
+  <div class="manual-card">
+  <div class="manual-row">
+    <div>
+      <div class="manual-title">No Strava? Log an activity manually.</div>
+      <div class="manual-sub">Anyone can add an activity - honor system, please log what you actually did.</div>
+    </div>
+    <button class="manual-btn" type="button" onclick="mFormToggle()">Add activity</button>
+  </div>
+  <form id="mForm" class="manual-form" style="display:none" onsubmit="mSubmit(event)">
+    <input type="text" id="mName" placeholder="Your name" required>
+    <input type="date" id="mDate" required>
+    <select id="mSport" required>
+      <option value="">Pick a sport...</option>
+      <option value="Crossfit">Crossfit</option><option value="HighIntensityIntervalTraining">HighIntensityIntervalTraining</option><option value="Rowing">Rowing</option><option value="Run">Run</option><option value="Swim">Swim</option><option value="TrailRun">TrailRun</option><option value="VirtualRun">VirtualRun</option><option value="StairStepper">StairStepper</option><option value="Basketball">Basketball</option><option value="Hike">Hike</option><option value="MountainBikeRide">MountainBikeRide</option><option value="Padel">Padel</option><option value="RockClimbing">RockClimbing</option><option value="Soccer">Soccer</option><option value="Squash">Squash</option><option value="Tennis">Tennis</option><option value="Badminton">Badminton</option><option value="GravelRide">GravelRide</option><option value="VolleyBall">VolleyBall</option><option value="Canoeing">Canoeing</option><option value="Elliptical">Elliptical</option><option value="Kayaking">Kayaking</option><option value="Ride">Ride</option><option value="StandUpPaddling">StandUpPaddling</option><option value="VirtualRide">VirtualRide</option><option value="Workout">Workout</option><option value="AlpineSki">AlpineSki</option><option value="IceSkate">IceSkate</option><option value="InlineSkate">InlineSkate</option><option value="Skateboard">Skateboard</option><option value="Snowboard">Snowboard</option><option value="WeightTraining">WeightTraining</option><option value="Pilates">Pilates</option><option value="Walk">Walk</option><option value="EBikeRide">EBikeRide</option><option value="EMountainBikeRide">EMountainBikeRide</option><option value="Golf">Golf</option><option value="Yoga">Yoga</option>
+    </select>
+    <input type="number" id="mMinutes" placeholder="Minutes" min="1" max="600" required>
+    <input type="text" id="mNote" placeholder="Note (optional)">
+    <button type="submit" class="manual-btn">Submit</button>
+    <div id="mStatus" class="manual-status"></div>
+  </form>
+</div>
+<script>
+const M_ENDPOINT = "https://weathered-term-044c.charleslowis2.workers.dev/manual-entry";
+function mFormToggle() {
+  const f = document.getElementById('mForm');
+  f.style.display = (f.style.display === 'none') ? 'grid' : 'none';
+  const d = document.getElementById('mDate');
+  if (f.style.display === 'grid' && !d.value) {
+    d.value = new Date().toISOString().split('T')[0];
+  }
+}
+async function mSubmit(ev) {
+  ev.preventDefault();
+  const st = document.getElementById('mStatus');
+  const payload = {
+    name: document.getElementById('mName').value.trim(),
+    date: document.getElementById('mDate').value,
+    sport: document.getElementById('mSport').value,
+    minutes: Number(document.getElementById('mMinutes').value),
+    note: document.getElementById('mNote').value.trim(),
+  };
+  st.textContent = 'Submitting...';
+  st.className = 'manual-status pending';
+  try {
+    const res = await fetch(M_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      st.textContent = 'Thanks! Your activity will show on the leaderboard within a few minutes.';
+      st.className = 'manual-status ok';
+      document.getElementById('mForm').reset();
+    } else {
+      st.textContent = 'Something went wrong. Please try again.';
+      st.className = 'manual-status err';
+    }
+  } catch (err) {
+    st.textContent = 'Network error. Please try again.';
+    st.className = 'manual-status err';
+  }
+}
+</script>
+
 
   <div class="podium-row"><div class="podium silver"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/44236361/46503574/1/medium.jpg" alt="" loading="lazy"><div class="medal">2</div><div class="p-name">Joren De Gruyter</div><div class="p-pts">1,359</div><div class="p-label">points</div></div><div class="podium gold"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy"><div class="medal">1</div><div class="p-name">Charles Lowis</div><div class="p-pts">1,473</div><div class="p-label">points</div></div><div class="podium bronze"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy"><div class="medal">3</div><div class="p-name">Joachim Jacobs</div><div class="p-pts">1,118</div><div class="p-label">points</div></div></div>
 
