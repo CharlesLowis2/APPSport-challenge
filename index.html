@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>APP Sport Points Challenge</title>
+<title>APP Sport Zomerchallenge</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root {
@@ -42,6 +42,8 @@
   @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } .hero { flex-direction: column; align-items: flex-start; } }
   .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
   .card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 16px; }
+  .section-title { font-size: 14px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); margin: 8px 0 4px; font-weight: 700; }
   .podium-row { display: flex; gap: 14px; align-items: flex-end; margin: 8px 0 28px; }
   .podium { flex: 1; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 12px; text-align: center; }
   .podium.gold { border-color: #f0c000; border-width: 2px; padding-top: 28px; padding-bottom: 28px; }
@@ -186,8 +188,8 @@
 <div class="wrap">
   <header>
     <div class="kicker">APP Sport</div>
-    <h1>APP Sport Points Challenge</h1>
-    <div class="sub">2026-07-01 to 2026-07-30 &nbsp;&middot;&nbsp; laatst bijgewerkt: 26 jul 2026, 18:20 CEST</div>
+    <h1>APP Sport Zomerchallenge</h1>
+    <div class="sub">2026-07-01 to 2026-07-30 &nbsp;&middot;&nbsp; laatst bijgewerkt: 26 jul 2026, 18:46 CEST</div>
   </header>
 
   <div class="hero">
@@ -366,6 +368,9 @@ async function tSubmit(ev) {
 </script>
 
 
+  
+
+  <h2 class="section-title">Individueel podium</h2>
   <div class="podium-row"><div class="podium silver"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/44236361/46503574/1/medium.jpg" alt="" loading="lazy"><div class="medal">2</div><div class="p-name">Joren De Gruyter</div><div class="p-pts">1,557</div><div class="p-label">punten</div></div><div class="podium gold"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy"><div class="medal">1</div><div class="p-name">Charles Lowis</div><div class="p-pts">2,013</div><div class="p-label">punten</div></div><div class="podium bronze"><img class="avatar avatar-lg" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy"><div class="medal">3</div><div class="p-name">Joachim Jacobs</div><div class="p-pts">1,432</div><div class="p-label">punten</div></div></div>
 
   <div class="card full" style="margin-bottom:20px">
