@@ -189,7 +189,7 @@
   <header>
     <div class="kicker">APP Sport</div>
     <h1>APP Sport Zomerchallenge</h1>
-    <div class="sub">2026-07-01 to 2026-07-30 &nbsp;&middot;&nbsp; laatst bijgewerkt: 26 jul 2026, 18:50 CEST</div>
+    <div class="sub">2026-07-01 to 2026-07-30 &nbsp;&middot;&nbsp; laatst bijgewerkt: 26 jul 2026, 18:53 CEST</div>
   </header>
 
   <div class="hero">
@@ -347,7 +347,7 @@ async function tSubmit(ev) {
     });
     const body = await res.json().catch(() => ({}));
     if (res.ok && body.ok) {
-      st.textContent = 'Gelukt! Je zit nu in team "' + team + '".';
+      st.textContent = 'Gelukt! Je zit nu in team "' + team + '". De wijziging verschijnt op het klassement bij de volgende refresh.';
       st.className = 'team-status ok';
       tLoadTeams();
     } else {
