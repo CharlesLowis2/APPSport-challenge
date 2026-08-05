@@ -24,7 +24,12 @@
   .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 20px 64px; }
   header { margin-bottom: 28px; }
   .kicker { text-transform: uppercase; letter-spacing: .12em; font-size: 12px; font-weight: 700; color: var(--accent); }
-  .brand-logo { display: block; height: 44px; width: auto; margin-bottom: 10px; }
+  .brand-bar {
+    background: linear-gradient(135deg, var(--brand-blue), #002b70);
+    border-radius: 14px; padding: 20px 28px; margin-bottom: 18px;
+    display: flex; align-items: center;
+  }
+  .brand-logo { display: block; height: 56px; width: auto; }
   h1 { font-size: 32px; margin: 4px 0 2px; }
   .sub { color: var(--muted); font-size: 14px; }
   .hero {
@@ -205,9 +210,9 @@
 <body>
 <div class="wrap">
   <header>
-    <img class="brand-logo" src="logo.png" alt="APP Sport">
+    <div class="brand-bar"><img class="brand-logo" src="logo.png" alt="APP Sport"></div>
     <h1>APP Sport Zomerchallenge</h1>
-    <div class="sub">2026-08-12 to 2026-09-09 &nbsp;&middot;&nbsp; laatst bijgewerkt: 5 aug 2026, 21:16 CEST</div>
+    <div class="sub">2026-08-12 to 2026-09-09 &nbsp;&middot;&nbsp; laatst bijgewerkt: 5 aug 2026, 21:19 CEST</div>
   </header>
 
   <div class="hero">
