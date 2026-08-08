@@ -84,11 +84,92 @@
   .team-badge.full { background: var(--ok); color: #fff; }
   .team-badge.partial { background: #b9c0c8; color: var(--ink); }
 
-  /* Join / manual / team form cards inherit their look from the main template. */
-  .team-form-card, .signup-card, .manual-form-card {
+  /* --- Join / manual / team form cards (copied from dashboard_template.html) --- */
+  .team-form-card {
+    display: flex; flex-direction: column; gap: 12px;
     padding: 16px 22px; margin-bottom: 20px;
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    background: var(--card); border: 1px solid var(--line);
+    border-left: 4px solid #2e7d32; border-radius: 14px;
   }
+  .team-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .team-title { font-weight: 700; font-size: 15px; }
+  .team-sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .team-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #2e7d32; color: #fff; border: 0; cursor: pointer;
+    font-weight: 700; font-size: 14px; padding: 11px 20px;
+    border-radius: 8px; white-space: nowrap; transition: background .15s;
+    font-family: inherit;
+  }
+  .team-btn:hover { background: #1b5e20; }
+  .team-form {
+    display: grid; grid-template-columns: 1.5fr 1.5fr 1fr; gap: 10px;
+    padding-top: 12px; border-top: 1px dashed var(--line);
+  }
+  .team-form input, .team-form select {
+    padding: 10px 12px; font-size: 14px; border: 1px solid var(--line); border-radius: 8px;
+    font-family: inherit; color: var(--ink); background: #fff;
+  }
+  .team-form input#tNewTeam { grid-column: 1 / -1; }
+  .team-form .team-btn { grid-column: 1 / -1; justify-content: center; }
+  .team-status { grid-column: 1 / -1; font-size: 13px; padding: 4px 0; min-height: 18px; }
+  .team-status.pending { color: var(--muted); }
+  .team-status.ok { color: #2e7d32; }
+  .team-status.err { color: var(--accent); }
+  @media (max-width: 720px) { .team-form { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .team-row { flex-direction: column; align-items: stretch; } .team-btn { justify-content: center; } .team-form { grid-template-columns: 1fr; } }
+  .signup-card {
+    display: flex; flex-direction: column; gap: 12px;
+    padding: 16px 22px; margin-bottom: 20px;
+    background: var(--card); border: 1px solid var(--line);
+    border-left: 4px solid var(--accent); border-radius: 14px;
+  }
+  .signup-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .signup-tip { font-size: 12px; color: var(--muted); line-height: 1.5; padding-top: 8px; border-top: 1px dashed var(--line); }
+  .signup-tip b { color: var(--ink); }
+  .signup-title { font-weight: 700; font-size: 15px; }
+  .signup-sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .signup-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fc4c02; color: #fff !important; text-decoration: none;
+    font-weight: 700; font-size: 14px; padding: 11px 20px;
+    border-radius: 8px; white-space: nowrap; transition: background .15s;
+  }
+  .signup-btn:hover { background: #d8410d; }
+  @media (max-width: 560px) { .signup-row { flex-direction: column; align-items: stretch; } .signup-btn { justify-content: center; } }
+  .manual-card {
+    display: flex; flex-direction: column; gap: 12px;
+    padding: 16px 22px; margin-bottom: 20px;
+    background: var(--card); border: 1px solid var(--line);
+    border-left: 4px solid var(--brand-blue); border-radius: 14px;
+  }
+  .manual-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .manual-title { font-weight: 700; font-size: 15px; }
+  .manual-sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .manual-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--brand-blue); color: #fff; border: 0; cursor: pointer;
+    font-weight: 700; font-size: 14px; padding: 11px 20px;
+    border-radius: 8px; white-space: nowrap; transition: background .15s;
+    font-family: inherit;
+  }
+  .manual-btn:hover { background: #002a70; }
+  .manual-form {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 10px;
+    padding-top: 12px; border-top: 1px dashed var(--line);
+  }
+  .manual-form input, .manual-form select {
+    padding: 10px 12px; font-size: 14px; border: 1px solid var(--line); border-radius: 8px;
+    font-family: inherit; color: var(--ink); background: #fff;
+  }
+  .manual-form input[type="text"]:nth-of-type(2) { grid-column: 1 / -1; }
+  .manual-form .manual-btn { grid-column: 1 / -1; justify-content: center; }
+  .manual-status { grid-column: 1 / -1; font-size: 13px; padding: 4px 0; min-height: 18px; }
+  .manual-status.pending { color: var(--muted); }
+  .manual-status.ok { color: #2e7d32; }
+  .manual-status.err { color: var(--accent); }
+  @media (max-width: 720px) { .manual-form { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .manual-row { flex-direction: column; align-items: stretch; } .manual-btn { justify-content: center; } .manual-form { grid-template-columns: 1fr; } }
 
   footer { margin-top: 40px; color: var(--muted); font-size: 12px; text-align: center; }
 </style>
@@ -97,7 +178,7 @@
 <div class="wrap">
   <header>
     <h1>APP Sport Zomerchallenge</h1>
-    <div class="sub">2026-08-12 to 2026-09-09 &nbsp;&middot;&nbsp; laatst bijgewerkt: 8 aug 2026, 13:03 CEST</div>
+    <div class="sub">2026-08-12 to 2026-09-09 &nbsp;&middot;&nbsp; laatst bijgewerkt: 8 aug 2026, 13:06 CEST</div>
   </header>
 
   <div class="pre-launch-banner">TESTFASE - de huidige waarden zijn data van de maand juli als voorbeeld. Op 12 augustus wordt alles gereset en start de echte challenge.</div>
