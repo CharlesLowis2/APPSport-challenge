@@ -1,90 +1,121 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>APP Sport Zomerchallenge</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root {
-    --accent: #E51837; --accent-dark: #A5182B;
-    --brand-blue: #001B4B; --ink: #001B4B;
-    --muted: #6b7682; --line: #e7eaee;
-    --bg: #f4f6f8; --card: #ffffff; --ok: #2e7d32;
+    --accent: #E51837;         /* ExxonMobil red */
+    --accent-dark: #A5182B;    /* darker red for gradients / hover */
+    --brand-blue: #001B4B;     /* ExxonMobil dark blue */
+    --ink: #001B4B;
+    --muted: #6b7682;
+    --line: #e7eaee;
+    --bg: #f4f6f8;
+    --card: #ffffff;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg); color: var(--ink); line-height: 1.5; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.5;
+  }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 20px 64px; }
-  header { margin-bottom: 20px; }
+  header { margin-bottom: 28px; }
+  .kicker { text-transform: uppercase; letter-spacing: .12em; font-size: 12px; font-weight: 700; color: var(--accent); }
+  .hero-logo { display: block; height: 80px; width: auto; flex-shrink: 0; max-width: 100%; }
+  @media (max-width: 720px) { .hero-logo { height: 60px; } }
   h1 { font-size: 32px; margin: 4px 0 2px; }
   .sub { color: var(--muted); font-size: 14px; }
-
   .hero {
     background: linear-gradient(135deg, var(--brand-blue), var(--accent));
     color: #fff; border-radius: 16px; padding: 28px 32px; margin: 24px 0;
-    display: flex; flex-wrap: wrap; gap: 24px;
-    align-items: center; justify-content: space-between;
+    display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between;
   }
   .hero .big { font-size: 52px; font-weight: 800; line-height: 1; }
+  .hero .big span { font-size: 20px; font-weight: 600; opacity: .9; }
   .hero .label { font-size: 13px; text-transform: uppercase; letter-spacing: .1em; opacity: .85; }
-  .hero-logo { display: block; height: 80px; width: auto; flex-shrink: 0; max-width: 100%; }
-  @media (max-width: 720px) { .hero-logo { height: 60px; } }
-
+  .hero .mini { display: flex; gap: 28px; }
+  .hero .mini div { text-align: center; }
+  .hero .mini .n { font-size: 26px; font-weight: 800; }
+  .hero .mini .l { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; opacity: .85; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } .hero { flex-direction: column; align-items: flex-start; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  .card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 16px; }
+  .section-title { font-size: 14px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); margin: 8px 0 4px; font-weight: 700; }
   .pre-launch-banner {
     background: #fff3cd; border: 1.5px solid #ffc107; color: #664d03;
     padding: 12px 18px; border-radius: 10px; margin-bottom: 20px;
     font-size: 14px; font-weight: 600; text-align: center;
   }
-  .countdown {
-    background: linear-gradient(135deg, #002b70, var(--brand-blue));
-    color: #fff; padding: 22px 28px; border-radius: 14px;
-    text-align: center; margin-bottom: 24px;
+  .min-highlight {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; padding: 12px 18px; margin: 0 0 28px;
+    background: linear-gradient(135deg, #fff5e6, #ffe8cc);
+    border: 1px solid #ffc107; border-radius: 10px;
   }
-  .countdown .k { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; opacity: .8; }
-  .countdown .d { font-size: 44px; font-weight: 800; margin: 6px 0 2px; }
-  .countdown .s { font-size: 14px; opacity: .85; }
-
-  .section-title { font-size: 14px; text-transform: uppercase; letter-spacing: .08em;
-    color: var(--muted); margin: 24px 0 10px; font-weight: 700; }
-
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 22px; }
-
+  .min-highlight .min-lbl {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+    font-weight: 700; color: #a06400;
+  }
+  .min-highlight .min-name { font-weight: 800; font-size: 16px; color: var(--brand-blue); }
+  .min-highlight .min-val { font-weight: 800; font-size: 16px; color: #a06400; }
+  .podium-row { display: flex; gap: 14px; align-items: flex-end; margin: 8px 0 28px; }
+  .podium { flex: 1; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 12px; text-align: center; }
+  .podium.gold { border-color: #f0c000; border-width: 2px; padding-top: 28px; padding-bottom: 28px; }
+  .podium.silver { border-color: #b9c0c8; }
+  .podium.bronze { border-color: #cd8a52; }
+  .podium.empty { background: transparent; border: 1px dashed var(--line); }
+  .medal {
+    width: 34px; height: 34px; border-radius: 50%; margin: 0 auto 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: #fff; background: var(--muted);
+  }
+  .gold .medal { background: #f0c000; }
+  .silver .medal { background: #b9c0c8; }
+  .bronze .medal { background: #cd8a52; }
+  .p-name { font-weight: 700; font-size: 15px; }
+  .p-pts { font-size: 26px; font-weight: 800; color: var(--brand-blue); margin-top: 4px; }
+  .p-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
   table { width: 100%; border-collapse: collapse; }
-  th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--line); font-size: 14px; }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); font-size: 14px; }
   th { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-  td.rank { color: var(--muted); font-weight: 700; width: 40px; }
-  td.name { font-weight: 700; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.rank { color: var(--muted); font-weight: 700; width: 44px; }
+  td.name { font-weight: 600; }
+  td.strong { font-weight: 800; color: var(--brand-blue); }
   td.muted, .muted { color: var(--muted); }
-
+  tr.top td.rank { color: var(--accent); }
+  .full { grid-column: 1 / -1; }
+  .chart-box { position: relative; height: 320px; }
+  footer { margin-top: 32px; color: var(--muted); font-size: 12px; text-align: center; }
   .avatar {
-    width: 32px; height: 32px; border-radius: 50%; object-fit: cover;
-    display: inline-block; vertical-align: middle; margin-right: 10px;
+    width: 26px; height: 26px; border-radius: 50%; object-fit: cover;
+    vertical-align: middle; display: inline-block; flex-shrink: 0;
     background: #e7eaee;
   }
+  .avatar-lg { width: 64px; height: 64px; margin: 0 auto 8px; display: block; }
   .avatar-ph {
     background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    color: #fff; font-weight: 700; font-size: 12px;
+    color: #fff; font-weight: 700; font-size: 11px;
     display: inline-flex; align-items: center; justify-content: center;
+    text-align: center;
   }
-
-  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px; }
-  @media (max-width: 720px) { .team-grid { grid-template-columns: 1fr; } }
-  .team-card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    padding: 14px 18px; border-left: 4px solid var(--ok);
-  }
-  .team-card.partial { border-left-color: #b9c0c8; }
-  .team-name { font-weight: 800; font-size: 15px; color: var(--brand-blue); }
-  .team-count { font-size: 12px; color: var(--muted); margin: 3px 0 8px; }
-  .team-members { font-size: 13px; color: var(--ink); }
-  .team-badge {
-    display: inline-block; font-size: 10px; font-weight: 700;
-    padding: 2px 7px; border-radius: 10px; margin-left: 6px;
-  }
-  .team-badge.full { background: var(--ok); color: #fff; }
+  .avatar-lg.avatar-ph { font-size: 22px; }
+  .cell-avatar { display: inline-flex; align-items: center; gap: 10px; }
+  .manual-badge { display: inline-block; font-size: 10px; font-weight: 700;
+    padding: 2px 6px; border-radius: 10px; background: var(--brand-blue);
+    color: #fff; margin-left: 6px; text-transform: uppercase; letter-spacing: .05em; }
+  .team-pill { display: inline-block; font-size: 11px; font-weight: 600;
+    padding: 2px 8px; border-radius: 10px; background: #e7eaee; color: var(--brand-blue);
+    margin-left: 8px; }
+  .team-badge { display: inline-block; font-size: 10px; font-weight: 700;
+    padding: 2px 6px; border-radius: 10px; margin-left: 6px; letter-spacing: .05em; }
+  .team-badge.full { background: #2e7d32; color: #fff; }
   .team-badge.partial { background: #b9c0c8; color: var(--ink); }
-
-  /* --- Join / manual / team form cards (copied from dashboard_template.html) --- */
   .team-form-card {
     display: flex; flex-direction: column; gap: 12px;
     padding: 16px 22px; margin-bottom: 20px;
@@ -170,28 +201,26 @@
   .manual-status.err { color: var(--accent); }
   @media (max-width: 720px) { .manual-form { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .manual-row { flex-direction: column; align-items: stretch; } .manual-btn { justify-content: center; } .manual-form { grid-template-columns: 1fr; } }
-
-  footer { margin-top: 40px; color: var(--muted); font-size: 12px; text-align: center; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>APP Sport Zomerchallenge</h1>
-    <div class="sub">2026-08-12 to 2026-09-09 &nbsp;&middot;&nbsp; laatst bijgewerkt: 11 aug 2026, 19:00 CEST</div>
+    <div class="sub">2026-08-12 to 2026-09-09 &nbsp;&middot;&nbsp; laatst bijgewerkt: 11 aug 2026, 19:18 CEST</div>
   </header>
-
-  <div class="pre-launch-banner">TESTFASE - de huidige waarden zijn data van de maand juli als voorbeeld. Op 12 augustus wordt alles gereset en start de echte challenge.</div>
 
   <div class="hero">
     <div>
-      <div class="label">Ingeschreven deelnemers</div>
-      <div class="big">32</div>
+      <div class="label">Totaal verzamelde punten</div>
+      <div class="big">0 <span>ptn</span></div>
     </div>
     <img class="hero-logo" src="logo.png" alt="APP Sport">
+    <div class="mini">
+      <div><div class="n">0</div><div class="l">Deelnemers</div></div>
+      <div><div class="n">0</div><div class="l">Activiteiten</div></div>
+    </div>
   </div>
-
-  <div class="countdown"><div class="k">Nog</div><div class="d">morgen (1 dag)</div><div class="s">tot de challenge start &mdash; woensdag 12 August, 00:00</div></div>
 
   <div class="signup-card"><div class="signup-row"><div><div class="signup-title">Nieuw in de challenge?</div><div class="signup-sub">Verbind je Strava &eacute;&eacute;n keer &mdash; daarna worden je activiteiten automatisch gesynchroniseerd.</div></div><a class="signup-btn" href="https://www.strava.com/oauth/authorize?client_id=265877&amp;response_type=code&amp;redirect_uri=https://script.google.com/macros/s/AKfycbyTGeUoGzYRNH_FdnV8KcMgtbjT2R3i3IMy0u_0aKKdAC023PuG1tRZ3DitCme4lKEW-g/exec&amp;approval_prompt=auto&amp;scope=activity:read_all" target="_blank" rel="noopener">Aanmelden via Strava &rarr;</a></div><div class="signup-tip"><b>Lukt aanmelden niet op mobiel?</b> Open deze pagina in Safari of Chrome (niet vanuit WhatsApp / LinkedIn / Slack) en log in met je Strava e-mail + wachtwoord &mdash; de Google/Apple aanmeldknoppen werken vaak niet op mobiel.</div></div>
   <div class="manual-card">
@@ -359,23 +388,134 @@ async function tSubmit(ev) {
 </script>
 
 
-  <h2 class="section-title">Teams</h2><div class="team-grid"><div class="team-card"><div class="team-name">Appsolutely unstoppable <span class="team-badge full">3/3</span></div><div class="team-count">Compleet team</div><div class="team-members">Ingrid Vandamme · Isabelle Demonie · Shauni Dictus</div></div><div class="team-card partial"><div class="team-name">I love APP Sport <span class="team-badge partial">2/3</span></div><div class="team-count">Nog 1 plek</div><div class="team-members">Charles Lowis · Joren De Gruyter</div></div><div class="team-card"><div class="team-name">Muscles from Brussels <span class="team-badge full">3/3</span></div><div class="team-count">Compleet team</div><div class="team-members">Kristine Rombaut · Maxim Van Vlierden · Nathalie Jacobs</div></div><div class="team-card"><div class="team-name">StrongHER Together <span class="team-badge full">3/3</span></div><div class="team-count">Compleet team</div><div class="team-members">Elisabeth Secuianu · emma van cleemput · Lore Gheeraert</div></div><div class="team-card partial"><div class="team-name">Team Maarten <span class="team-badge partial">1/3</span></div><div class="team-count">Nog 2 plekken</div><div class="team-members">Maarten Verhelst</div></div><div class="team-card"><div class="team-name">TeamRAWT <span class="team-badge full">3/3</span></div><div class="team-count">Compleet team</div><div class="team-members">carl · Robin Anthoon · William Tytgat</div></div><div class="team-card"><div class="team-name">UT <span class="team-badge full">3/3</span></div><div class="team-count">Compleet team</div><div class="team-members">Gino Vercauteren · Henny Herrijgers · Mehdi De Roeck</div></div><div class="team-card partial"><div class="team-name">Wandelen is Werken <span class="team-badge partial">2/3</span></div><div class="team-count">Nog 1 plek</div><div class="team-members">Jorik Maes · yannick deleersnyder</div></div><div class="team-card partial"><div class="team-name">Zero CE <span class="team-badge partial">1/3</span></div><div class="team-count">Nog 2 plekken</div><div class="team-members">pedro bravo</div></div></div>
+  
 
-  <h2 class="section-title">Alle deelnemers (32)</h2>
-  <div class="card">
+  
+
+  <h2 class="section-title">Individueel podium</h2>
+  <div class="podium-row"><div class="podium empty"></div><div class="podium empty"></div><div class="podium empty"></div></div>
+  
+
+  <div class="card full" style="margin-bottom:20px">
+    <h2>Klassement</h2>
     <table>
       <thead>
-        <tr><th>#</th><th>Naam</th><th>Team</th></tr>
+        <tr>
+          <th>#</th><th>Naam</th><th class="num">Punten</th>
+          <th class="num">Activiteiten</th><th class="num">Actieve min</th><th>Laatst actief</th>
+        </tr>
       </thead>
-      <tbody>
-        <tr><td class="rank">1</td><td class="name"><span class="avatar avatar-ph">C</span>carl</td><td>TeamRAWT</td></tr><tr><td class="rank">2</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/39571081/12565372/3/medium.jpg" alt="" loading="lazy">Charles Lowis</td><td>I love APP Sport</td></tr><tr><td class="rank">3</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/27407948/12532567/1/medium.jpg" alt="" loading="lazy">Dan Turnure</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">4</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/48717503/28722629/2/medium.jpg" alt="" loading="lazy">Eberd De Donder</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">5</td><td class="name"><span class="avatar avatar-ph">EH</span>Eddy Heremansð§ðª</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">6</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/52639702/27421002/3/medium.jpg" alt="" loading="lazy">Elisabeth Secuianu</td><td>StrongHER Together</td></tr><tr><td class="rank">7</td><td class="name"><span class="avatar avatar-ph">EV</span>emma van cleemput</td><td>StrongHER Together</td></tr><tr><td class="rank">8</td><td class="name"><span class="avatar avatar-ph">GV</span>Gino Vercauteren</td><td>UT</td></tr><tr><td class="rank">9</td><td class="name"><span class="avatar avatar-ph">HH</span>Henny Herrijgers</td><td>UT</td></tr><tr><td class="rank">10</td><td class="name"><span class="avatar avatar-ph">IV</span>Ingrid Vandamme</td><td>Appsolutely unstoppable</td></tr><tr><td class="rank">11</td><td class="name"><span class="avatar avatar-ph">ID</span>Isabelle Demonie</td><td>Appsolutely unstoppable</td></tr><tr><td class="rank">12</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/12052025/37477177/1/medium.jpg" alt="" loading="lazy">Joachim Jacobs</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">13</td><td class="name"><span class="avatar avatar-ph">JD</span>Johan De Paepe</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">14</td><td class="name"><span class="avatar avatar-ph">JV</span>Jonathan Verbruggen</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">15</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/44236361/46503574/1/medium.jpg" alt="" loading="lazy">Joren De Gruyter</td><td>I love APP Sport</td></tr><tr><td class="rank">16</td><td class="name"><span class="avatar avatar-ph">JM</span>Jorik Maes</td><td>Wandelen is Werken</td></tr><tr><td class="rank">17</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/64854163/30434508/3/medium.jpg" alt="" loading="lazy">Kristine Rombaut</td><td>Muscles from Brussels</td></tr><tr><td class="rank">18</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/26335669/9154935/3/medium.jpg" alt="" loading="lazy">Lore Gheeraert</td><td>StrongHER Together</td></tr><tr><td class="rank">19</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/34023886/46622517/1/medium.jpg" alt="" loading="lazy">Maarten Verhelst</td><td>Team Maarten</td></tr><tr><td class="rank">20</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/24501965/7041975/6/medium.jpg" alt="" loading="lazy">Maxim Van Vlierden</td><td>Muscles from Brussels</td></tr><tr><td class="rank">21</td><td class="name"><span class="avatar avatar-ph">MD</span>Mehdi De Roeck</td><td>UT</td></tr><tr><td class="rank">22</td><td class="name"><span class="avatar avatar-ph">NJ</span>Nathalie Jacobs</td><td>Muscles from Brussels</td></tr><tr><td class="rank">23</td><td class="name"><span class="avatar avatar-ph">PB</span>pedro bravo</td><td>Zero CE</td></tr><tr><td class="rank">24</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/10828802/12706505/5/medium.jpg" alt="" loading="lazy">Pieter Meulemans</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">25</td><td class="name"><span class="avatar avatar-ph">RA</span>Robin Anthoon</td><td>TeamRAWT</td></tr><tr><td class="rank">26</td><td class="name"><span class="avatar avatar-ph">SD</span>Shauni Dictus</td><td>Appsolutely unstoppable</td></tr><tr><td class="rank">27</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/18743755/5344025/2/medium.jpg" alt="" loading="lazy">Stijn Van Den Eede</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">28</td><td class="name"><span class="avatar avatar-ph">TW</span>Thijs Wildemeersch</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">29</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/52877405/48778842/1/medium.jpg" alt="" loading="lazy">Tom Bats</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">30</td><td class="name"><img class="avatar" src="https://dgalywyr863hv.cloudfront.net/pictures/athletes/22787708/9804803/1/medium.jpg" alt="" loading="lazy">William Tytgat</td><td>TeamRAWT</td></tr><tr><td class="rank">31</td><td class="name"><span class="avatar avatar-ph">WT</span>Wouter Thaens</td><td><span class="muted">&mdash;</span></td></tr><tr><td class="rank">32</td><td class="name"><span class="avatar avatar-ph">YD</span>yannick deleersnyder</td><td>Wandelen is Werken</td></tr>
-      </tbody>
+      <tbody><tr><td colspan="6" class="muted" style="text-align:center;padding:32px">Nog geen activiteiten &mdash; het klassement vult zich zodra deelnemers activiteiten registreren.</td></tr></tbody>
     </table>
   </div>
 
+  <div class="card full" style="margin-bottom:20px">
+    <h2>Team-klassement</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th><th>Team</th><th>Leden</th><th class="num">Punten</th>
+        </tr>
+      </thead>
+      <tbody><tr class="top"><td class="rank">1</td><td class="name">I love APP Sport <span class="team-badge partial">0/3</span></td><td class="muted">&mdash;</td><td class="num strong">0</td></tr><tr class="top"><td class="rank">2</td><td class="name">Team Maarten <span class="team-badge partial">0/3</span></td><td class="muted">&mdash;</td><td class="num strong">0</td></tr><tr class="top"><td class="rank">3</td><td class="name">StrongHER Together <span class="team-badge partial">0/3</span></td><td class="muted">&mdash;</td><td class="num strong">0</td></tr><tr class=""><td class="rank">4</td><td class="name">Wandelen is Werken <span class="team-badge partial">0/3</span></td><td class="muted">&mdash;</td><td class="num strong">0</td></tr><tr class=""><td class="rank">5</td><td class="name">Muscles from Brussels <span class="team-badge partial">0/3</span></td><td class="muted">&mdash;</td><td class="num strong">0</td></tr><tr class=""><td class="rank">6</td><td class="name">TeamRAWT <span class="team-badge partial">0/3</span></td><td class="muted">&mdash;</td><td class="num strong">0</td></tr><tr class=""><td class="rank">7</td><td class="name">UT <span class="team-badge partial">0/3</span></td><td class="muted">&mdash;</td><td class="num strong">0</td></tr><tr class=""><td class="rank">8</td><td class="name">Appsolutely unstoppable <span class="team-badge partial">0/3</span></td><td class="muted">&mdash;</td><td class="num strong">0</td></tr><tr class=""><td class="rank">9</td><td class="name">Zero CE <span class="team-badge partial">0/3</span></td><td class="muted">&mdash;</td><td class="num strong">0</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="card full" style="margin-bottom:20px">
+    <h2>Recente activiteiten</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Wanneer</th><th>Wie</th><th>Sport</th>
+          <th class="num">Afstand</th><th class="num">Duur</th><th class="num">Punten</th>
+        </tr>
+      </thead>
+      <tbody><tr><td class="muted">10 Aug 00:00</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">WT</span>Wouter Thaens</span></td><td>Tennis <span class="manual-badge">handmatig</span></td><td class="num">-</td><td class="num">60 min</td><td class="num strong">72</td></tr><tr><td class="muted">10 Aug 00:00</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">JD</span>Johan De Paepe</span></td><td>Ride <span class="manual-badge">handmatig</span></td><td class="num">-</td><td class="num">60 min</td><td class="num strong">60</td></tr><tr><td class="muted">09 Aug 00:00</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">WT</span>Wouter Thaens</span></td><td>Ride <span class="manual-badge">handmatig</span></td><td class="num">-</td><td class="num">70 min</td><td class="num strong">70</td></tr><tr><td class="muted">05 Aug 00:00</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">WT</span>Wouter Thaens</span></td><td>Swim <span class="manual-badge">handmatig</span></td><td class="num">-</td><td class="num">75 min</td><td class="num strong">112</td></tr><tr><td class="muted">28 Jul 00:00</td><td class="name"><span class="cell-avatar"><span class="avatar avatar-ph">JV</span>Jonathan Verbruggen</span></td><td>Basketball <span class="manual-badge">handmatig</span></td><td class="num">-</td><td class="num">90 min</td><td class="num strong">108</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Top 15</h2>
+      <div class="chart-box"><canvas id="barChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Punten per sport</h2>
+      <div class="chart-box"><canvas id="typeChart"></canvas></div>
+    </div>
+    <div class="card full">
+      <h2>Cumulatieve punten in de tijd</h2>
+      <div class="chart-box"><canvas id="cumChart"></canvas></div>
+    </div>
+    <div class="card full">
+      <h2>Hoe worden punten berekend</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px"><b>punten = actieve minuten &times; factor</b>. Elke minuut van Strava's actieve tijd telt (stiltijd wordt automatisch door Strava gefilterd), zonder cap per activiteit.</p>
+      <table>
+        <thead><tr><th class="num">ptn / min</th><th>Sporten</th></tr></thead>
+        <tbody><tr><td class="num strong">1.5</td><td>Crossfit, HighIntensityIntervalTraining, Rowing, Run, Swim, TrailRun, VirtualRun</td></tr><tr><td class="num strong">1.3</td><td>StairStepper</td></tr><tr><td class="num strong">1.2</td><td>Basketball, Hike, MountainBikeRide, Padel, RockClimbing, Soccer, Squash, Tennis</td></tr><tr><td class="num strong">1.1</td><td>Badminton, GravelRide, VolleyBall</td></tr><tr><td class="num strong">1</td><td>Canoeing, Elliptical, Kayaking, Ride, StandUpPaddling, VirtualRide, Workout</td></tr><tr><td class="num strong">0.8</td><td>AlpineSki, IceSkate, InlineSkate, Skateboard, Snowboard, WeightTraining</td></tr><tr><td class="num strong">0.6</td><td>Pilates, Walk</td></tr><tr><td class="num strong">0.4</td><td>EBikeRide, EMountainBikeRide, Golf, Yoga</td></tr><tr><td class="num muted">1</td><td class="muted">elke andere sport</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
   <footer>
-    Op 12 augustus 00:00 schakelt dit dashboard automatisch over naar het puntenklassement.
+    Gegenereerd door het APP Sport Strava dashboard-script. Alleen activiteiten geregistreerd
+    tijdens de challenge tellen mee.
   </footer>
 </div>
+
+<script>
+  const ACCENT = "#E51837";
+  const palette = ["#E51837","#001B4B","#0072CE","#F5B335","#66BB6A","#26A69A",
+                   "#8E24AA","#795548","#5C6BC0","#EC407A","#78909C","#43A047"];
+  Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif";
+  Chart.defaults.color = "#6b7682";
+
+  new Chart(document.getElementById("barChart"), {
+    type: "bar",
+    data: { labels: [], datasets: [] },
+    options: {
+      indexAxis: "y", responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "bottom", labels: { boxWidth: 12, boxHeight: 12, font: { size: 11 } } },
+        tooltip: { callbacks: {
+          footer: (items) => "Total: " + items.reduce((s, i) => s + i.parsed.x, 0).toLocaleString() + " pts"
+        } }
+      },
+      scales: {
+        x: { beginAtZero: true, stacked: true, title: { display: true, text: "Punten" } },
+        y: { stacked: true, ticks: { autoSkip: false, font: { size: 11 } } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById("typeChart"), {
+    type: "doughnut",
+    data: {
+      labels: [],
+      datasets: [{ data: [], backgroundColor: [] }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: "right" } }
+    }
+  });
+
+  new Chart(document.getElementById("cumChart"), {
+    type: "line",
+    data: {
+      labels: [],
+      datasets: [{
+        label: "Cumulative points", data: [],
+        borderColor: ACCENT, backgroundColor: "rgba(229,24,55,.12)",
+        fill: true, tension: .25, pointRadius: 2
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+</script>
 </body>
 </html>
