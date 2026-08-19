@@ -207,7 +207,7 @@
 <div class="wrap">
   <header>
     <h1>APP Sport Zomerchallenge</h1>
-    <div class="sub">2026-08-12 to 2026-09-09 &nbsp;&middot;&nbsp; laatst bijgewerkt: 19 aug 2026, 22:07 CEST</div>
+    <div class="sub">2026-08-12 to 2026-09-09 &nbsp;&middot;&nbsp; laatst bijgewerkt: 19 aug 2026, 22:22 CEST</div>
   </header>
 
   <div class="hero">
@@ -446,6 +446,10 @@ async function tSubmit(ev) {
       <div class="chart-box"><canvas id="cumChart"></canvas></div>
     </div>
     <div class="card full">
+      <h2>Top 3 teams &mdash; cumulatieve punten</h2>
+      <div class="chart-box"><canvas id="teamCumChart"></canvas></div>
+    </div>
+    <div class="card full">
       <h2>Hoe worden punten berekend</h2>
       <p style="font-size:13px;color:var(--muted);margin-bottom:14px"><b>punten = actieve minuten &times; factor</b>. Elke minuut van Strava's actieve tijd telt (stiltijd wordt automatisch door Strava gefilterd), zonder cap per activiteit.</p>
       <table>
@@ -516,6 +520,24 @@ async function tSubmit(ev) {
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+
+  new Chart(document.getElementById("teamCumChart"), {
+    type: "line",
+    data: {
+      labels: ["2026-08-12", "2026-08-13", "2026-08-14", "2026-08-15", "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19"],
+      datasets: [{"label": "I love APP Sport", "data": [561, 1000, 1383, 2232, 2955, 3377, 3888, 4612], "borderColor": "#f0c000", "backgroundColor": "transparent", "fill": false, "tension": 0.25, "pointRadius": 2, "borderWidth": 3}, {"label": "UT", "data": [321, 701, 1367, 2000, 2647, 3041, 3576, 4158], "borderColor": "#b9c0c8", "backgroundColor": "transparent", "fill": false, "tension": 0.25, "pointRadius": 2, "borderWidth": 3}, {"label": "TeamRAWT", "data": [266, 629, 955, 1210, 1827, 2110, 2219, 2331], "borderColor": "#cd8a52", "backgroundColor": "transparent", "fill": false, "tension": 0.25, "pointRadius": 2, "borderWidth": 3}]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: { boxWidth: 14, boxHeight: 14, font: { size: 12 }, padding: 10 }
+        }
+      },
       scales: { y: { beginAtZero: true } }
     }
   });
